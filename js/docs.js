@@ -31,11 +31,10 @@ function addPage(page, book) {
 
 function updateTabs() {
   var tabs = {
-      7: "Clases",
-      12: "Constructor",
-      14: "Properties",
-      16: "Methods",
-      23: "Events",
+      /*
+      1: "First",
+      12: "End",
+    */
     },
     left = [],
     right = [],
