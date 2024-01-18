@@ -25,9 +25,9 @@
 		</div>
 	</div>
 	<div class="bottom">
-		<p>test</p>
 		<div id="slider-bar" class="turnjs-slider">
 			<div id="slider"></div>
+			<div class="page-number">Pages <span class="current-range-start">1</span><span class="page-separator">-</span><span class="current-range-end">2</span> of <span class="total-pages">10</span></div>
 		</div>
 	</div>
 </div>
@@ -137,7 +137,7 @@ function loadApp() {
 
 		when: {
 			swipeLeft: function() {
-
+console.log("left");
 				$(this).zoom('flipbook').turn('next');
 
 			},

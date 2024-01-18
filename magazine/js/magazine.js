@@ -95,12 +95,43 @@ function isChrome() {
   return navigator.userAgent.indexOf("Chrome") != -1;
 }
 
+/**
+ * Updates controls and page number display based on the current page.
+ * @param {number} page - The current page number.
+ */
 function disableControls(page) {
-  if (page == 1) $(".previous-button").hide();
-  else $(".previous-button").show();
+  // Get the total number of pages
+  var totalPages = $(".magazine").turn("pages");
 
-  if (page == $(".magazine").turn("pages")) $(".next-button").hide();
-  else $(".next-button").show();
+  // Cache jQuery selectors for better performance
+  var $prevButton = $(".previous-button");
+  var $nextButton = $(".next-button");
+  var $pageNumber = $(".page-number");
+  var $rangeStart = $pageNumber.find(".current-range-start");
+  var $rangeEnd = $pageNumber.find(".current-range-end");
+  var $separator = $pageNumber.find(".page-separator");
+
+  // Toggle visibility of previous and next buttons based on the current page
+  $prevButton.toggle(page !== 1);
+  $nextButton.toggle(page + 1 < totalPages);
+
+  // Update the current page range or single page in the page number display
+  if (page === 1) {
+    $rangeStart.text(1).show();
+    $rangeEnd.hide();
+    $separator.hide();
+  } else if (page >= totalPages) {
+    $rangeStart.text(totalPages).hide();
+    $rangeEnd.text(totalPages).show();
+    $separator.hide();
+  } else {
+    $rangeStart.text(page).show();
+    $rangeEnd.text(page + 1).show();
+    $separator.show();
+  }
+
+  // Update the total number of pages in the page number display
+  $pageNumber.find(".total-pages").text(totalPages);
 }
 
 // Set the width and height for the viewport
